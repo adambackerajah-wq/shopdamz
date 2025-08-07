@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DamzShop - Toko super Interaktif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==================== GLOBAL STYLES ==================== */
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --dark: #292f36;
+            --light: #f7fff7;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: var(--gradient);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--dark);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            margin: 0 1rem;
+        }
+
+        .navbar ul li a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar ul li a:hover, .navbar ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            color: white;
+            outline: none;
+            width: 150px;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .cart-icon, .user-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .cta-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: rotate(-2deg) scale(1.02);
+        }
+
+        /* ==================== FEATURES SECTION ==================== */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 30%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .voice-btn, .ar-btn, .chat-btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .voice-btn {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .ar-btn {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .chat-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ==================== PRODUCTS SECTION ==================== */
+        .products {
+            padding: 4rem 5%;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart, .view-3d {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+        }
+
+        .add-to-cart:hover {
+            background: #ff5252;
+        }
+
+        .view-3d {
+            background: var(--dark);
+            color: white;
+        }
+
+        .view-3d:hover {
+            background: #1a1f24;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ==================== MODAL STYLES ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .product-viewer {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        #3d-product-img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .viewer-controls {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .viewer-controls button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--dark);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .viewer-controls button:hover {
+            background: var(--primary);
+        }
+
+        /* ==================== CHAT WIDGET STYLES ==================== */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .chat-widget.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-chat {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+
+        .bot-message {
+            background: white;
+            color: var(--dark);
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        #send-message {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* ==================== RESPONSIVE STYLES ==================== */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 6rem;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                width: 80%;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: all 0.3s ease;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .navbar.active {
+                left: 0;
+            }
+            
+            .navbar ul {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .navbar ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .search-box {
+                display: none;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+            
+            .chat-widget {
+                width: 90%;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="header">
+        <div class="logo">
+            <h1>Damz<span>Shop</span></h1>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="icons">
+            <div class="search-box">
+                <input type="text" placeholder="Search..." id="search-input">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+            <div class="user-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to DamzShop</h2>
+            <p>Website super interaktif dan super rumit</p>
+            <button class="cta-btn">Shop</button>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Hero Image" id="hero-img">
+        </div>
+    </section>
+
+    <!-- Interactive Features -->
+    <section class="features">
+        <div class="feature" id="voice-search">
+            <i class="fas fa-microphone"></i>
+            <h3>Voice Search</h3>
+            <p>Fitur belum tersedia</p>
+            <button class="voice-btn">Speak Now</button>
+            <p></p>
+        </div>
+        <div class="feature" id="ar-view">
+            <i class="fas fa-vr-cardboard"></i>
+            <h3>AR View</h3>
+            <p>Fitur belum tersedia</p>
+            <button class="ar-btn">Try AR</button>
+        </div>
+        <div class="feature" id="live-chat">
+            <i class="fas fa-comments"></i>
+            <h3>Live Chat</h3>
+            <p>Fitur belum tersedia</p>
+            <button class="chat-btn">Chat Now</button>
+        </div>
+    </section>
+
+    <!-- Product Gallery -->
+    <section class="products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be loaded here via JavaScript -->
+        </div>
+    </section>
+
+    <!-- 3D Product Viewer Modal -->
+    <div class="modal" id="3d-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>3D Product Viewer</h2>
+            <div class="product-viewer" id="product-viewer">
+                <!-- 3D viewer will be rendered here -->
+                <img src="" alt="3D Product" id="3d-product-img">
+                <div class="viewer-controls">
+                    <button id="rotate-left"><i class="fas fa-undo"></i></button>
+                    <button id="rotate-right"><i class="fas fa-redo"></i></button>
+                    <button id="zoom-in"><i class="fas fa-search-plus"></i></button>
+                    <button id="zoom-out"><i class="fas fa-search-minus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <h3>Live Chat</h3>
+            <button class="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message..." id="chat-input">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <div class="chat-toggle" id="chat-toggle">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <script>
+        // ==================== JAVASCRIPT ====================
+        
+        // Sample product data with real image URLs
+        const products = [
+            {
+                id: 1,
+                name: "Wireless Headphones",
+                price: 99.99,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "Premium wireless headphones with noise cancellation",
+                badge: "BESTSELLER",
+                colors: ["black", "white", "blue"],
+                images3d: [
+                    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                ]
+            },
+            {
+                id: 2,
+                name: "Smart Watch",
+                price: 199.99,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "Feature-packed smartwatch with health monitoring",
+                badge: "NEW",
+                colors: ["black", "silver", "gold"],
+                images3d: [
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1558126319-c9feecbf57ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                ]
+            },
+            {
+                id: 3,
+                name: "Bluetooth Speaker",
+                price: 79.99,
+                image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "Portable speaker with 20h battery life",
+                badge: "SALE",
+                colors: ["red", "blue", "black"],
+                images3d: [
+                    "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1545454675-3531b543be5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1547721064-da6cfb341d50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                ]
+            },
+            {
+                id: 4,
+                name: "Gaming Keyboard",
+                price: 129.99,
+                image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "Mechanical keyboard with RGB lighting",
+                badge: "HOT",
+                colors: ["black", "white"],
+                images3d: [
+                    "https://images.unsplash.com/photo-1540932239986-30128078f3c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1555680202-c86f0e12f086?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                ]
+            },
+            {
+                id: 5,
+                name: "Wireless Mouse",
+                price: 49.99,
+                image: "https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "Ergonomic wireless mouse with precision sensor",
+                colors: ["black", "white", "gray"],
+                images3d: [
+                    "https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1586201375761-83865001e1ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                ]
+            },
+            {
+                id: 6,
+                name: "4K Monitor error",
+                price: 99,
+                image: "https://images.unsplash.com/photo-1546538915-a9e2c8ee0a6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "27-inch 4K UHD monitor with HDR",
+                badge: "PREMIUM",
+                colors: ["black", "silver"],
+                images3d: [
+                    "https://images.unsplash.com/photo-1546538915-a9e2c8ee0a6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1551645120-d70bfe84c826?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const productGrid = document.getElementById('product-grid');
+        const modal = document.getElementById('3d-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const productViewer = document.getElementById('product-viewer');
+        const chatWidget = document.getElementById('chat-widget');
+        const chatToggle = document.getElementById('chat-toggle');
+        const closeChat = document.querySelector('.close-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendMessage = document.getElementById('send-message');
+        const cartCount = document.querySelector('.cart-count');
+        const voiceBtn = document.querySelector('.voice-btn');
+        const searchBox = document.querySelector('.search-box input');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navbar = document.querySelector('.navbar');
+        const header = document.querySelector('.header');
+
+        // Cart functionality
+        let cart = [];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            setupEventListeners();
+            updateCartCount();
+        });
+
+        // Render products to the page
+        function renderProducts() {
+            productGrid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                let badge = '';
+                if (product.badge) {
+                    badge = `<div class="product-badge">${product.badge}</div>`;
+                }
+                
+                productCard.innerHTML = `
+                    ${badge}
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+                            <button class="view-3d" data-id="${product.id}">3D View</button>
+                        </div>
+                    </div>
+                `;
+                
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // 3D View buttons
+            document.querySelectorAll('.view-3d').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    open3DViewer(productId);
+                });
+            });
+            
+            // Add to cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+            
+            // Modal close button
+            closeModal.addEventListener('click', close3DViewer);
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    close3DViewer();
+                }
+            });
+            
+            // Chat toggle
+            chatToggle.addEventListener('click', toggleChat);
+            closeChat.addEventListener('click', toggleChat);
+            
+            // Send message
+            sendMessage.addEventListener('click', sendChatMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            });
+            
+            // Voice search
+            voiceBtn.addEventListener('click', startVoiceSearch);
+            
+            // Menu toggle for mobile
+            menuToggle.addEventListener('click', function() {
+                navbar.classList.toggle('active');
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // 3D viewer controls
+            document.getElementById('rotate-left').addEventListener('click', function() {
+                rotateProduct('left');
+            });
+            
+            document.getElementById('rotate-right').addEventListener('click', function() {
+                rotateProduct('right');
+            });
+            
+            document.getElementById('zoom-in').addEventListener('click', function() {
+                zoomProduct('in');
+            });
+            
+            document.getElementById('zoom-out').addEventListener('click', function() {
+                zoomProduct('out');
+            });
+
+            // Search functionality
+            searchBox.addEventListener('input', function() {
+                filterProducts(this.value);
+            });
+        }
+
+        // 3D Viewer functions
+        let currentProduct = null;
+        let currentImageIndex = 0;
+
+        function open3DViewer(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            currentImageIndex = 0;
+            
+            document.getElementById('3d-product-img').src = currentProduct.images3d[currentImageIndex];
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+
+        function close3DViewer() {
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function rotateProduct(direction) {
+            if (!currentProduct) return;
+            
+            if (direction === 'left') {
+                currentImageIndex = (currentImageIndex - 1 + currentProduct.images3d.length) % currentProduct.images3d.length;
+            } else {
+                currentImageIndex = (currentImageIndex + 1) % currentProduct.images3d.length;
+            }
+            
+            document.getElementById('3d-product-img').src = currentProduct.images3d[currentImageIndex];
+        }
+
+        function zoomProduct(action) {
+            const img = document.getElementById('3d-product-img');
+            let currentWidth = img.offsetWidth;
+            
+            if (action === 'in') {
+                img.style.width = (currentWidth + 50) + 'px';
+            } else {
+                if (currentWidth > 200) {
+                    img.style.width = (currentWidth - 50) + 'px';
+                }
+            }
+        }
+
+        // Cart functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            updateCartCount();
+            
+            // Show animation
+            const button = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
+            button.textContent = 'Added!';
+            button.style.backgroundColor = '#4CAF50';
+            
+            setTimeout(() => {
+                button.textContent = 'Add to Cart';
+                button.style.backgroundColor = 'var(--primary)';
+            }, 1000);
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = count;
+        }
+
+        // Chat functions
+        function toggleChat() {
+            chatWidget.classList.toggle('active');
+        }
+
+        function sendChatMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, 'user-message');
+                chatInput.value = '';
+                
+                // Simulate bot response
+                setTimeout(() => {
+                    const responses = [
+                        "Thanks for your message! How can we help you today?",
+                        "Our team will get back to you shortly.",
+                        "Would you like assistance with any products?",
+                        "We're here to help with your shopping needs!"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'bot-message');
+                }, 1000);
+            }
+        }
+
+        function addMessage(text, className) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${className}`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Voice search
+        function startVoiceSearch() {
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+                
+                voiceBtn.textContent = 'Listening...';
+                voiceBtn.style.backgroundColor = '#ff5252';
+                
+                recognition.start();
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    searchBox.value = transcript;
+                    voiceBtn.textContent = 'Speak Now';
+                    voiceBtn.style.backgroundColor = 'var(--secondary)';
+                    
+                    // Simulate search
+                    filterProducts(transcript);
+                };
+                
+                recognition.onerror = function(event) {
+                    voiceBtn.textContent = 'Try Again';
+                    voiceBtn.style.backgroundColor = '#ff5252';
+                };
+            } else {
+                alert('Voice search is not supported in your browser.');
+            }
+        }
+
+        // Product filtering
+        function filterProducts(searchTerm) {
+            const term = searchTerm.toLowerCase();
+            const filtered = products.filter(product => 
+                product.name.toLowerCase().includes(term) || 
+                product.description.toLowerCase().includes(term)
+            );
+            
+            // Re-render filtered products
+            productGrid.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                productGrid.innerHTML = '<p class="no-results">No products found. Try a different search term.</p>';
+            } else {
+                filtered.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    let badge = '';
+                    if (product.badge) {
+                        badge = `<div class="product-badge">${product.badge}</div>`;
+                    }
+                    
+                    productCard.innerHTML = `
+                        ${badge}
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-price">$${product.price.toFixed(2)}</div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+                                <button class="view-3d" data-id="${product.id}">3D View</button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    productGrid.appendChild(productCard);
+                });
+                
+                // Re-attach event listeners to new buttons
+                document.querySelectorAll('.view-3d').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        open3DViewer(productId);
+                    });
+                });
+                
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        addToCart(productId);
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>
